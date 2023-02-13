@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Express } from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
@@ -22,6 +23,8 @@ class App {
   constructor(port: number) {
     this.port = port;
     this.app = express();
+    this.app.use(cors());
+    
     this.httpServer = http.createServer(this.app);
     this.io = new Server<
       ClientToServerEvents,
