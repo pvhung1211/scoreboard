@@ -8,6 +8,8 @@ import {
   ServerToClientEvents
 } from './types';
 
+
+const PORT = process.env.PORT || 4000;
 class App {
   private app: Express;
   private port: number;
@@ -24,7 +26,6 @@ class App {
     this.port = port;
     this.app = express();
     this.app.use(cors());
-    
     this.httpServer = http.createServer(this.app);
     this.io = new Server<
       ClientToServerEvents,
@@ -72,4 +73,4 @@ class App {
   }
 }
 
-new App(3000).start();
+new App(Number(PORT)).start();
